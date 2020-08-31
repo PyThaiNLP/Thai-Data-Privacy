@@ -35,7 +35,7 @@ def filter_thai_id_card_number(text:str)->str:
 
 def filter_personname(text:str)->str:
   n = ner.get_ner(text,tag=True)
-  return _filter(thainer,n,"person_name")
+  return thainer.sub("",_filter(name_re,n,"person_name"))
 
 def filter_all(text:str)->str:
   text = filter_thai_id_card_number(filter_url(filter_phone(filter_email(filter_personname(text)))))
