@@ -26,6 +26,10 @@ def gen_email() -> str:
     global fake
     return fake.email()
 
+def gen_url() -> str:
+    global fake
+    return fake.url()
+
 def gen_thai_id_card_number(thai_format:bool = False) -> str:
     t = ""
     if thai_format:
