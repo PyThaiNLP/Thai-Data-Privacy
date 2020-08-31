@@ -1,2 +1,3 @@
 nltk
 pythainlp>=2.1
+Faker
