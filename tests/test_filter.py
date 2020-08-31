@@ -17,7 +17,7 @@ class TestFilterPackage(unittest.TestCase):
     def test_url(self):
         self.assertEqual(
             filter_url("https://auth.geeksforgeeks.org https://จดหมาย.คน.ไทย"),
-            "[url-1] [url-1]"
+            "[url-1] [url-2]"
         )
     def test_thai_id_card_number(self):
         self.assertEqual(
