@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
 from setuptools import find_packages
-requirements = [
-    'pythainlp>=2.1'
-]
+
+with open("requirements.txt","r",encoding="utf-8") as f:
+    requirements = [i.strip() for i in f.readlines()]
+
 with open("README.md", "r", encoding="utf-8") as readme_file:
     readme = readme_file.read()
 
