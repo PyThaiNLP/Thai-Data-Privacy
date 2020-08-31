@@ -11,7 +11,7 @@ name_re = re.compile(name)
 thai_id_card_number_re = re.compile(thai_id_card_number)
 thainer = re.compile("<[^>]*>")
 
-def _filter(regex,text,tag):
+def _filter(regex:re.Pattern,text:str,tag:str)->str:
   list_item2 = []
   list_item = regex.findall(text)
   for i in list_item:
