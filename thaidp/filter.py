@@ -9,6 +9,7 @@ phone_number_re = re.compile(phone_number)
 url_re = re.compile(url)
 name_re = re.compile(name)
 thai_id_card_number_re = re.compile(thai_id_card_number)
+thainer = re.compile("<[^>]*>")
 
 def clean_email(text:str)->str:
   return email_re.sub("[email]",text)
@@ -24,4 +25,8 @@ def clean_thai_id_card_number(text:str)->str:
 
 def clean_personname(text:str)->str:
   n = ner.get_ner(text,tag=True)
-  return name_re.sub("[person_name]",n)
+  return thainer.sub("",name_re.sub("[person_name]",n))
+
+def clean_all(text:str)->str:
+  text = clean_thai_id_card_number(clean_url(clean_phone(clean_email(clean_personname(text)))))
+  return text
