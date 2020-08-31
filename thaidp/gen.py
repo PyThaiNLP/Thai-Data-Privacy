@@ -41,15 +41,15 @@ def gen_thai_id_card_number(thai_format:bool = False) -> str:
     if thai_format:
         t = "-"
     output = str(random.randint(1, 8))
-    output +=t
+    output += t
     for i in range(0,4):
         output += str(random.randint(0, 9))
-    output +=t
+    output += t
     for i in range(0,5):
         output += str(random.randint(0, 9))
-    output +=t
+    output += t
     for i in range(0,2):
         output += str(random.randint(0, 9))
-    output +=t
+    output += t
     output += str(random.randint(0, 9))
     return output
