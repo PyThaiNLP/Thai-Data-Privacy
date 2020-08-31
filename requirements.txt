@@ -1,1 +1,2 @@
+nltk
 pythainlp>=2.1
