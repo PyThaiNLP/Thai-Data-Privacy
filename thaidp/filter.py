@@ -14,13 +14,16 @@ thainer = re.compile("<[^>]*>")
 def _filter(regex:re.Pattern,text:str,tag:str,output_tag:bool=False)->str:
   list_item2 = []
   list_item = regex.findall(text)
+  list_item3 = []
   for i in list_item:
     if i not in list_item2:
       list_item2.append(i)
   for i,v in enumerate(list_item):
-    text = text.replace(v,"["+tag+"-"+str(i+1)+"]")
+    _i = "["+tag+"-"+str(i+1)+"]"
+    text = text.replace(v,_i)
+    list_item3.append(_i)
   if output_tag:
-    return (text,list_item2)
+    return (text,list_item3)
   return text
 
 def filter_email(text:str,output_tag:bool=False)->str:
