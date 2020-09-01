@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from thaidp.rules import *
 import re
+from functools import reduce
 from pythainlp.tag.named_entity import ThaiNameTagger
 
 ner = ThaiNameTagger()
@@ -45,6 +46,5 @@ def filter_personname(text:str,output_tag:bool=False)->str:
     return (thainer.sub("",temp[0]),temp[1])
   return thainer.sub("",temp)
 
-def filter_all(text:str)->str:
-  text = filter_thai_id_card_number(filter_url(filter_phone(filter_email(filter_personname(text)))))
-  return text
+def filter(text:str, steps:object=[filter_personname, filter_email, filter_phone, filter_url, filter_thai_id_card_number])->str:
+  return reduce(lambda x, y : y(x), steps, text)

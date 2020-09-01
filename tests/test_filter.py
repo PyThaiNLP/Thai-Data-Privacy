@@ -4,6 +4,11 @@ from thaidp.filter import *
 
 
 class TestFilterPackage(unittest.TestCase):
+    def test_filter(self):
+        self.assertEqual(
+            filter('ผมมีอีเมล wannaphong@kkumail.com และ วรรณพงษ์@คน.ไทย'),
+            'ผมมีอีเมล [email-1] และ [email-2]'
+        )
     def test_email(self):
         self.assertEqual(
             filter_email('ผมมีอีเมล wannaphong@kkumail.com และ วรรณพงษ์@คน.ไทย'),
