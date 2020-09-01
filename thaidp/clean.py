@@ -2,6 +2,7 @@
 from thaidp.gen import *
 from thaidp.filter import *
 import random
+from functools import reduce
 
 def random_bool() -> bool:
     return random.choice([True,False])
