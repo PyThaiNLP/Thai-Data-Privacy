@@ -11,7 +11,7 @@ name_re = re.compile(name)
 thai_id_card_number_re = re.compile(thai_id_card_number)
 thainer = re.compile("<[^>]*>")
 
-def _filter(regex:re.Pattern,text:str,tag:str)->str:
+def _filter(regex:re.Pattern,text:str,tag:str,output_tag:bool=False)->str:
   list_item2 = []
   list_item = regex.findall(text)
   for i in list_item:
@@ -19,23 +19,28 @@ def _filter(regex:re.Pattern,text:str,tag:str)->str:
       list_item2.append(i)
   for i,v in enumerate(list_item):
     text = text.replace(v,"["+tag+"-"+str(i+1)+"]")
+  if output_tag:
+    return (text,list_item2)
   return text
 
-def filter_email(text:str)->str:
-  return _filter(email_re,text,"email")
+def filter_email(text:str,output_tag:bool=False)->str:
+  return _filter(email_re,text,"email",output_tag)
 
-def filter_phone(text:str)->str:
-  return _filter(phone_number_re,text,"phone")
+def filter_phone(text:str,output_tag:bool=False)->str:
+  return _filter(phone_number_re,text,"phone",output_tag)
 
-def filter_url(text:str)->str:
-  return _filter(url_re,text,"url")
+def filter_url(text:str,output_tag:bool=False)->str:
+  return _filter(url_re,text,"url",output_tag)
 
-def filter_thai_id_card_number(text:str)->str:
-  return _filter(thai_id_card_number_re,text,"thai_id_card_number")
+def filter_thai_id_card_number(text:str,output_tag:bool=False)->str:
+  return _filter(thai_id_card_number_re,text,"thai_id_card_number",output_tag)
 
-def filter_personname(text:str)->str:
+def filter_personname(text:str,output_tag:bool=False)->str:
   n = ner.get_ner(text,tag=True)
-  return thainer.sub("",_filter(name_re,n,"person_name"))
+  temp = _filter(name_re,n,"person_name",output_tag)
+  if output_tag:
+    return (thainer.sub("",temp[0]),temp[1])
+  return thainer.sub("",temp)
 
 def filter_all(text:str)->str:
   text = filter_thai_id_card_number(filter_url(filter_phone(filter_email(filter_personname(text)))))
