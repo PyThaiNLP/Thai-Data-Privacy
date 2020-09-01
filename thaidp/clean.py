@@ -66,3 +66,6 @@ def clean_all(text:str) -> str:
     list_all += temp[1]
     list_replace+= [gen_thai_id_card_number(random_bool()) for i in range(0,len(list_index)) if len(list_index)!=0]
     return _replace(text_temp,list_all, list_replace)
+
+def clean(text, steps:object=[clean_name, clean_phone, clean_email, clean_thai_id_card_number]):
+    return reduce(lambda x, y : y(x), steps, text)
