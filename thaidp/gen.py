@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import random
-from pythainlp.corpus import thai_female_names, thai_male_names
+from pythainlp.corpus import thai_female_names, thai_male_names, thai_words
 from faker import Faker
 fake = Faker()
 
 list_name = list(thai_female_names()) + list(thai_male_names())
+list_domain_thai = [".go.th",".co.th",".or.th",".in.th",".ac.th",".net.th",".mi.th",".ไทย"]
+list_thai_word = [i for i in list(thai_words()) if ' ' not in i]
 
 def gen_name(full_name:bool = False) -> str:
     name = random.choice(list_name)
@@ -22,9 +24,25 @@ def gen_thai_phone_number(mobile:bool = True) -> str:
         num += str(random.randint(0, 9))
     return num
 
-def gen_email() -> str:
+def _gen_thai_mail():
+    last_domain = random.choice(list_domain_thai)
+    email = ""
+    if last_domain == ".ไทย":
+        email+=random.choice(list_thai_word)
+        email+="@"
+        email+=random.choice(list_thai_word)
+    else:
+        email = fake.email()
+        email = '.'.join(email.split(".")[:-1])
+    email+=last_domain
+    return email
+
+def gen_email(thai_only:bool = False) -> str:
     global fake
-    return fake.email()
+    if thai_only:
+        return _gen_thai_mail()
+    else:
+        return fake.email()
 
 def gen_url() -> str:
     global fake
