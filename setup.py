@@ -17,7 +17,7 @@ setup(
     long_description_content_type="text/markdown",
     author_email='wannaphong@kkumail.com',
     url='https://github.com/wannaphong/Thai-Data-Privacy',
-    packages=['.'],
+    packages=find_packages(),
     package_data={'': ['LICENSE','README.md']},
     include_package_data=True,
     test_suite="tests",
