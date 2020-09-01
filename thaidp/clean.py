@@ -18,3 +18,10 @@ def clean_name(text:str) -> str:
     list_index = temp[1]
     list_name = [gen_name(random_bool()) for i in range(0,len(list_index)) if len(list_index)!=0]
     return _replace(text_temp,list_index, list_name)
+
+def clean_phone(text:str) -> str:
+    temp = filter_phone(text,output_tag=True)
+    text_temp = temp[0]
+    list_index = temp[1]
+    list_phone = [gen_thai_phone_number(random_bool()) for i in range(0,len(list_index)) if len(list_index)!=0]
+    return _replace(text_temp,list_index, list_phone)
