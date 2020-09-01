@@ -9,7 +9,7 @@ with open("README.md", "r", encoding="utf-8") as readme_file:
     readme = readme_file.read()
 
 setup(
-    name='ThaiDP',
+    name='thaidp',
     version='0.1dev0',
     description="ThaiDP = Thai Data Privacy Tool For Python",
     author='Wannaphong Phatthiyaphaibun',
