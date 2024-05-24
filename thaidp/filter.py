@@ -2,7 +2,7 @@
 from thaidp.rules import *
 import re
 from functools import reduce
-from pythainlp.tag.named_entity import ThaiNameTagger
+from pythainlp.tag.thainer import ThaiNameTagger
 
 ner = ThaiNameTagger()
 email_re = re.compile(email)
